@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import PasswordRecoveryModal from '../components/PasswordRecoveryModal'
 
 export default function Login(){
   const [cred, setCred] = useState('')
   const [senha, setSenha] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [showRecovery, setShowRecovery] = useState(false)
   const navigate = useNavigate()
 
   const handleLogin = async () => {
@@ -55,8 +57,11 @@ export default function Login(){
 
         <div className="footer-link">
           <Link to="/register">fazer cadastro</Link>
+          <button type="button" className="btn-link" onClick={() => setShowRecovery(true)}>Esqueci minha senha</button>
         </div>
       </form>
+
+      {showRecovery && <PasswordRecoveryModal onClose={() => setShowRecovery(false)} />}
     </div>
   )
 }
